@@ -4,9 +4,7 @@
 	"tags"		:	[ "build" ],
 	"ignore"	:
 	[
-		"*.psd",
-		"*.vcproj",
 		"*.svn*",
-		"addon.txt"
+		"*.git"
 	]
 }
