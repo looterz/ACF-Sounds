@@ -1,6 +1,6 @@
 
 -- Config
-ACF_SOUND_VERSION = "0.0.3";
+ACF_SOUND_VERSION = "0.0.4";
 
 -- Distances to determine which sound variant to play
 ACF_FAR_DIST = 13000;

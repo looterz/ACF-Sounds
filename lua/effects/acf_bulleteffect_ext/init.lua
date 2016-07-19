@@ -31,10 +31,14 @@ if (Hit > 0 and Bullet) then	--Scale encodes the hit type, so if it's 0 it's a n
    self.HitPierce = ACF.RoundTypes[Bullet.AmmoType]["pierceeffect"]
    self:HitPierce( Bullet )
 
+   sound.Play( table.Random( ACF.ImpactSounds["Penetration"] ), data:GetOrigin(), 75, math.random( 90, 110 ), 0.8 );
+
  elseif (Hit == 3) then		--Bullet ricocheted, don't remove old effect
 
    self.HitRicochet = ACF.RoundTypes[Bullet.AmmoType]["ricocheteffect"]
    self:HitRicochet( Bullet )
+
+   sound.Play( table.Random( ACF.ImpactSounds["Ricochet"] ), data:GetOrigin(), 75, math.random( 90, 110 ), 0.8 );
 
  end
  ACF_SimBulletFlight( Bullet, self.Index )
