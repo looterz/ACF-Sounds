@@ -5,7 +5,7 @@ The main goal of this project is to make it so you can hear weapon fire accurate
 Sounds are played based on the players position relative to the firing weapons position, and played in 3D so that the human ear can accurately judge the direction the fire is coming from.
 
 # Usage
-Using the ACF Sound Replacer tool, browse to the acf_new folder and pick any weapon calibers "close.wav" sound, the addon takes care of the rest.
+Using the ACF Sound Replacer tool, browse to the acf_new/weapons folder and pick any weapon calibers "close.wav" sound, the addon takes care of the rest.
 
 # Sound Ranges
 * Indoors - Under 3000 meters and inside of a building, small calibers only.
