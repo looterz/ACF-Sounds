@@ -1,0 +1,12 @@
+{
+	"title"		:	"ACF Sound Extension Project",
+	"type"		:	"weapon",
+	"tags"		:	[ "build" ],
+	"ignore"	:
+	[
+		"*.psd",
+		"*.vcproj",
+		"*.svn*",
+		"addon.txt"
+	]
+}
