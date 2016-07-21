@@ -1,27 +1,29 @@
 
+AddCSLuaFile( "sh_definitions.lua" );
 AddCSLuaFile( "shared.lua" );
 AddCSLuaFile( "cl_init.lua" );
+AddCSLuaFile( "cl_soundbrowser.lua" );
 
+include( "sh_definitions.lua" );
 include( "shared.lua" );
 
 -- Add workshop version for clients
 resource.AddWorkshop( "235370240" );
 
---hook.Add( "Think", "Splode", function()
---
---	local explode = ents.FindByClass("env_explosion")
---
---	for k,v in pairs( explode ) do
---
---		if( v:IsValid() ) then
---
---			local Pos = v:LocalToWorld( v:OBBCenter() );
---			ParticleEffect("dusty_explosion_rockets", Pos, Angle(0,0,0), nil);
---
---			v:Remove();
---
---		end
---
---	end
---
---end );
+-- ACF Missiles compatibility hook
+util.AddNetworkString( "acf_sound_missile" );
+
+hook.Add( "ACF_SOUND_MISSILE", "ACF_SOUND_MISSILE_COMPATIBILITY", function( missile, sound )
+
+  if( ACF_SOUND_DEBUG ) then
+
+    print("[ACF_SOUND_EXT] ACF_SOUND_MISSILE hook called\n");
+
+  end
+
+  net.Start( "acf_sound_missile" );
+    net.WriteEntity( missile );
+    net.WriteString( sound );
+  net.Broadcast();
+
+end );

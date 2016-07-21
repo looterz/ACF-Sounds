@@ -1,5 +1,7 @@
 
+include( "sh_definitions.lua" );
 include( "shared.lua" );
+include( "cl_soundbrowser.lua" );
 
 function ACF_PROCESS_SOUND( Name, Pos )
 
@@ -16,7 +18,7 @@ function ACF_PROCESS_SOUND( Name, Pos )
 	local ClosePos = pl:GetPos();
 
 	if( dir != nil ) then
-		
+
 		ClosePos = pl:GetPos() + dir * 50; -- A good position to play the distance sound, that is towards the target within 50 source units, to give the distant sounds a sense of direction
 
 	end
@@ -47,7 +49,7 @@ function ACF_PROCESS_SOUND( Name, Pos )
 		-- Play near sound
 		--local name = Sound( table.Random( snd.Near ) );
 		local name = Sound( snd.Near[1] );
-		
+
 		sound.Play( name, ClosePos, 100 );
 
 	elseif( dist > ACF_MED_DIST and dist < ACF_FAR_DIST ) then
@@ -55,7 +57,7 @@ function ACF_PROCESS_SOUND( Name, Pos )
 		-- Play medium sound
 		--local name = Sound( table.Random( snd.Medium ) );
 		local name = Sound( snd.Medium[1] );
-		
+
 		timer.Simple( ACF_MED_DELAY, function()
 
 			if( name != nil and ClosePos != nil ) then
@@ -71,7 +73,7 @@ function ACF_PROCESS_SOUND( Name, Pos )
 		-- Play far sound
 		--local name = Sound( table.Random( snd.Far ) );
 		local name = Sound( snd.Far[1] );
-		
+
 		timer.Simple( ACF_FAR_DELAY, function()
 
 			if( name != nil and ClosePos != nil ) then
@@ -87,7 +89,7 @@ function ACF_PROCESS_SOUND( Name, Pos )
 		-- Play far sound anyway
 		--local name = Sound( table.Random( snd.Far ) );
 		local name = Sound( snd.Far[1] );
-		
+
 		timer.Simple( ACF_FAR_DELAY, function()
 
 			if( name != nil and ClosePos != nil ) then
@@ -113,3 +115,32 @@ function ACF_SonicCrack( Category, Pos )
 	end
 
 end
+
+-- ACF Missiles compatibility hook
+net.Receive( "acf_sound_missile", function( len )
+
+	hook.Call( "ACF_SOUND_MISSILE", nil, net.ReadEntity(), net.ReadString() );
+
+end );
+
+hook.Add( "ACF_SOUND_MISSILE", "ACF_SOUND_MISSILE_COMPATIBILITY", function( missile, sound )
+
+	if( !IsValid( missile ) ) then return end
+
+	if( ACF_SOUND_DEBUG ) then
+
+		print("[ACF_SOUND_EXT] ACF_SOUND_MISSILE hook called\nmissile: ".. tostring( missile ) .."\nsound: ".. tostring( sound ) .."\n");
+
+	end
+
+	if( ACF_GET_SOUND( sound ) != nil ) then
+
+		ACF_PROCESS_SOUND( sound, missile:GetPos() );
+
+	else
+
+		missile:EmitSound( sound, 511, 100 );
+
+	end
+
+end );

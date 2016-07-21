@@ -1,21 +1,10 @@
 
--- Config
-ACF_SOUND_VERSION = "0.0.4";
-
--- Distances to determine which sound variant to play
-ACF_FAR_DIST = 13000;
-ACF_MED_DIST = 8000;
-ACF_NEAR_DIST = 3000;
-
--- Delay until sound being heard at certain distances to give the effect of a late report
-ACF_FAR_DELAY = 0.6;
-ACF_MED_DELAY = 0.4;
-
 -- Detours
 local EffectEngine = util.Effect;
 
 function util.Effect( effectName, effectData, allowOverride, ignorePredictionOrRecipientFilter )
 
+	-- ACF Sound Extension Project must override effects to implement new features
 	if( tostring( effectName ) == "ACF_MuzzleFlash" ) then
 
 		effectName = "acf_muzzleflash_ext";
@@ -31,10 +20,6 @@ function util.Effect( effectName, effectData, allowOverride, ignorePredictionOrR
 	elseif( tostring( effectName ) == "ACF_Scaled_Explosion" ) then
 
 		effectName = "acf_scaled_explosion_ext";
-
-	elseif( tostring( effectName ) == "ACF_Tracer" ) then
-
-		effectName = "acf_tracer_ext";
 
 	end
 
@@ -75,48 +60,16 @@ function ACF_OUTSIDE( pos )
 
 end
 
--- Extension Library
-ACF.ExtendedSounds = {};
-ACF.SonicCracks = {};
-ACF.ImpactSounds = {};
-
-ACF.Explosions = {
-	"acf_new/explosions/generic/tank1.wav",
-	"acf_new/explosions/generic/tank2.wav",
-	"acf_new/explosions/generic/tank3.wav",
-	"acf_new/explosions/generic/tank4.wav",
-	"acf_new/explosions/generic/tank5.wav",
-	"acf_new/explosions/generic/tank6.wav",
-	"acf_new/explosions/generic/tank7.wav",
-	"acf_new/explosions/generic/tank8.wav"
-};
-
-ACF.ImpactSounds["Penetration"] = {
-	"acf_new/impacts/penetration/pen1.wav",
-	"acf_new/impacts/penetration/pen2.wav",
-	"acf_new/impacts/penetration/pen3.wav",
-	"acf_new/impacts/penetration/pen4.wav",
-	"acf_new/impacts/penetration/pen5.wav",
-	"acf_new/impacts/penetration/pen6.wav"
-};
-
-ACF.ImpactSounds["Ricochet"] = {
-	"acf_new/impacts/ricochet/ric1.wav",
-	"acf_new/impacts/ricochet/ric2.wav",
-	"acf_new/impacts/ricochet/ric3.wav",
-	"acf_new/impacts/ricochet/ric4.wav",
-	"acf_new/impacts/ricochet/ric5.wav",
-	"acf_new/impacts/ricochet/ric6.wav"
-};
-
--- Sound Definitions
-
 -- fuck my life
 function ACF_SOUND_BUILD()
 
 	local weaponFiles, weaponDirs = file.Find( "sound/acf_new/weapons/*", "GAME" );
 
-	--print("[ACF_SOUND_EXT] Building weapon sound tables...\n");
+	if( ACF_SOUND_DEBUG ) then
+
+		print("[ACF_SOUND_EXT] Building weapon sound tables...\n");
+
+	end
 
 	local SoundTable = {};
 
@@ -141,7 +94,11 @@ function ACF_SOUND_BUILD()
 			-- process every soundgroup file within a weapons soundgroup subdirectory
 			for d, e in pairs( bfiles ) do
 
-				--print( string.format( "[ACF_SOUND_EXT] Found sound/acf_new/weapons/%s/%s/%s\n", v, b, e ) );
+				if( ACF_SOUND_DEBUG ) then
+
+					print( string.format( "[ACF_SOUND_EXT] Found sound/acf_new/weapons/%s/%s/%s\n", v, b, e ) );
+
+				end
 
 				local sndstr = string.format( "acf_new/weapons/%s/%s/%s", v, b, e );
 
@@ -194,121 +151,20 @@ function ACF_SOUND_BUILD()
 
 	end
 
-	--print("[ACF_SOUND_EXT] Weapon sound tables built.\n");
+	if( ACF_SOUND_DEBUG ) then
+
+		print("[ACF_SOUND_EXT] Weapon sound tables built.\n");
+
+	end
 
 end
 
 hook.Add( "InitPostEntity", "ACF_SOUNDS_INIT", function()
 
 	-- Banner
-	print("[ACF] ACF Sound Extension Library version ".. tostring( ACF_SOUND_VERSION ) .." loaded.\n");
+	print("[ACF] ACF Sound Extension Project version ".. tostring( ACF_SOUND_VERSION ) .." loaded.\n");
 
 	-- rip cpu
 	ACF_SOUND_BUILD();
 
 end );
-
--- Sonic Cracks
--- Machine Guns
-ACF.SonicCracks["7.62mm Machinegun Ammo"] = {
-	"acf_new/sonic-cracks/7_62/crack1.wav",
-	"acf_new/sonic-cracks/7_62/crack2.wav",
-	"acf_new/sonic-cracks/7_62/crack3.wav",
-	"acf_new/sonic-cracks/7_62/crack4.wav",
-	"acf_new/sonic-cracks/7_62/crack5.wav",
-	"acf_new/sonic-cracks/7_62/crack6.wav"
-};
-
-ACF.SonicCracks["12.7mm Machinegun Ammo"] = {
-	"acf_new/sonic-cracks/12_7/crack1.wav",
-	"acf_new/sonic-cracks/12_7/crack2.wav",
-	"acf_new/sonic-cracks/12_7/crack3.wav",
-	"acf_new/sonic-cracks/12_7/crack4.wav",
-	"acf_new/sonic-cracks/12_7/crack5.wav",
-	"acf_new/sonic-cracks/12_7/crack6.wav"
-};
-
--- Autocannons
-ACF.SonicCracks["20mm Autocannon Ammo"] = {
-	"acf_new/sonic-cracks/autocannon/crack1.wav",
-	"acf_new/sonic-cracks/autocannon/crack2.wav",
-	"acf_new/sonic-cracks/autocannon/crack3.wav",
-	"acf_new/sonic-cracks/autocannon/crack4.wav",
-	"acf_new/sonic-cracks/autocannon/crack5.wav",
-	"acf_new/sonic-cracks/autocannon/crack6.wav"
-};
-
-ACF.SonicCracks["30mm Autocannon Ammo"] = {
-	"acf_new/sonic-cracks/autocannon/crack1.wav",
-	"acf_new/sonic-cracks/autocannon/crack2.wav",
-	"acf_new/sonic-cracks/autocannon/crack3.wav",
-	"acf_new/sonic-cracks/autocannon/crack4.wav",
-	"acf_new/sonic-cracks/autocannon/crack5.wav",
-	"acf_new/sonic-cracks/autocannon/crack6.wav"
-};
-
-ACF.SonicCracks["40mm Autocannon Ammo"] = {
-	"acf_new/sonic-cracks/autocannon/crack1.wav",
-	"acf_new/sonic-cracks/autocannon/crack2.wav",
-	"acf_new/sonic-cracks/autocannon/crack3.wav",
-	"acf_new/sonic-cracks/autocannon/crack4.wav",
-	"acf_new/sonic-cracks/autocannon/crack5.wav",
-	"acf_new/sonic-cracks/autocannon/crack6.wav"
-};
-
--- Cannons
-ACF.SonicCracks["100mm Cannon Ammo"] = {
-	"acf_new/sonic-cracks/cannon/shellfly1.wav",
-	"acf_new/sonic-cracks/cannon/shellfly2.wav",
-	"acf_new/sonic-cracks/cannon/shellfly3.wav",
-	"acf_new/sonic-cracks/cannon/shellfly4.wav",
-	"acf_new/sonic-cracks/cannon/shellfly5.wav",
-	"acf_new/sonic-cracks/cannon/shellfly6.wav"
-};
-
-ACF.SonicCracks["120mm Cannon Ammo"] = {
-	"acf_new/sonic-cracks/cannon/shellfly1.wav",
-	"acf_new/sonic-cracks/cannon/shellfly2.wav",
-	"acf_new/sonic-cracks/cannon/shellfly3.wav",
-	"acf_new/sonic-cracks/cannon/shellfly4.wav",
-	"acf_new/sonic-cracks/cannon/shellfly5.wav",
-	"acf_new/sonic-cracks/cannon/shellfly6.wav"
-};
-
-ACF.SonicCracks["140mm Cannon Ammo"] = {
-	"acf_new/sonic-cracks/cannon/shellfly1.wav",
-	"acf_new/sonic-cracks/cannon/shellfly2.wav",
-	"acf_new/sonic-cracks/cannon/shellfly3.wav",
-	"acf_new/sonic-cracks/cannon/shellfly4.wav",
-	"acf_new/sonic-cracks/cannon/shellfly5.wav",
-	"acf_new/sonic-cracks/cannon/shellfly6.wav"
-};
-
--- Howitzers
-ACF.SonicCracks["105mm Howitzer Ammo"] = {
-	"acf_new/sonic-cracks/howitzer/artyfly1.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly2.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly3.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly4.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly5.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly6.wav"
-};
-
-ACF.SonicCracks["155mm Howitzer Ammo"] = {
-	"acf_new/sonic-cracks/howitzer/artyfly1.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly2.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly3.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly4.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly5.wav",
-	"acf_new/sonic-cracks/howitzer/artyfly6.wav"
-};
-
--- Missiles
-ACF.SonicCracks["40mm Grenade Machine Gun Ammo"] = {
-	"acf_new/sonic-cracks/missile/fly1.wav",
-	"acf_new/sonic-cracks/missile/fly2.wav",
-	"acf_new/sonic-cracks/missile/fly3.wav",
-	"acf_new/sonic-cracks/missile/fly4.wav",
-	"acf_new/sonic-cracks/missile/fly5.wav",
-	"acf_new/sonic-cracks/missile/fly6.wav"
-};
