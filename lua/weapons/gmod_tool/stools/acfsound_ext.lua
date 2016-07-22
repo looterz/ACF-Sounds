@@ -2,15 +2,15 @@
 local cat = ((ACF.CustomToolCategory and ACF.CustomToolCategory:GetBool()) and "ACF" or "Construction");
 
 TOOL.Category		= cat
-TOOL.Name			= "#Tool.acfsoundext.name"
+TOOL.Name			= "#Tool.acfsoundadv.name"
 TOOL.Command		= nil
 TOOL.ConfigName		= ""
 
 TOOL.ClientConVar["pitch"] = "1"
 if CLIENT then
-	language.Add( "Tool.acfsoundext.name", "ACF Sound Advanced" )
-	language.Add( "Tool.acfsoundext.desc", "Change sound of guns/engines." )
-	language.Add( "Tool.acfsoundext.0", "Left click to apply sound. Right click to copy sound. Reload to set default sound." )
+	language.Add( "Tool.acfsoundadv.name", "ACF Sound Advanced" )
+	language.Add( "Tool.acfsoundadv.desc", "Change sound of guns/engines." )
+	language.Add( "Tool.acfsoundadv.0", "Left click to apply sound. Right click to copy sound. Reload to set default sound." )
 end
 
 
@@ -210,7 +210,7 @@ function TOOL.BuildCPanel(panel)
 	SoundPreStop:SetTall(20)
 	SoundPreStop:SetVisible(true)
 	SoundPreStop.DoClick = function()
-		RunConsoleCommand("play", "common/NULL.WAV") //Playing a silent sound will mute the preview but not the sound emitters.
+		RunConsoleCommand("play", "common/NULL.wav") //Playing a silent sound will mute the preview but not the sound emitters.
 	end
 	panel:AddItem(SoundPre)
 	SoundPre:InvalidateLayout(true)
