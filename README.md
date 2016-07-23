@@ -4,7 +4,7 @@ A new experimental sound system for [ACF](https://github.com/nrlulz/ACF).
 [![Video Demonstration](https://img.youtube.com/vi/6g1oUhZQWTA/0.jpg)](https://youtu.be/6g1oUhZQWTA)
 
 # Features
-* Hundreds of new, high quality sounds to choose from for ACF weapons and engines.
+* Hundreds of new, high quality sounds to choose from for ACF weapons.
 * Sound engine that plays sounds at 4 different ranges, in 3D positioning towards the sound origin.
 * Sonic cracks and passing shells can be heard if one whizzes by your location.
 * Late reports based on distance from firing weapons.
