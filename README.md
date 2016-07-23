@@ -14,7 +14,7 @@ A new experimental sound system for [ACF](https://github.com/nrlulz/ACF).
 * Variety of other sound effect related improvements to ACF to make combat feel more intense and realistic.
 
 # Usage
-Using the ACF Sound Replacer tool, browse to the acf_new/weapons folder and pick any weapons "close" sound, the addon takes care of the rest.
+Using the ACF Sound Advanced tool, browse to the acf_new/weapons folder and pick any weapons "close" sound, the addon takes care of the rest.
 
 # Sound Ranges
 * Indoors - Under 3000 meters and inside of a building, small calibers only.
