@@ -165,15 +165,15 @@ function EFFECT:Core()
 		sound.Play( table.Random( ACF.Explosions ), pos, math.Clamp(radius*10,75,165), math.Clamp(300 - radius*12,15,255))
 		sound.Play( table.Random( ACF.Explosions ), pos, math.Clamp(radius*10,75,165), math.Clamp(300 - radius*25,15,255))
 
-		sound.Play( "acf_new/explosions/cookoff/cook1.ogg", pos );
+		sound.Play( "acf_new/explosions/cookoff/cook1.wav", pos );
 
 		timer.Simple( 1, function()
 
-			sound.Play( "acf_new/explosions/cookoff/cook2.ogg", pos );
+			sound.Play( "acf_new/explosions/cookoff/cook2.wav", pos );
 
 			timer.Simple( 1, function()
 
-				sound.Play( "acf_new/explosions/cookoff/cook3.ogg", pos );
+				sound.Play( "acf_new/explosions/cookoff/cook3.wav", pos );
 
 				for i=0, 0.5*radius*partmul do
 					local Cookoff = EffectData()
@@ -199,8 +199,8 @@ function EFFECT:Core()
 
 		end
 
-		sound.Play( "ambient/explosions/explode_5.ogg", self.Origin , math.Clamp(self.Radius*10,75,165), math.Clamp(300 - self.Radius*12,15,255))
-		sound.Play( "ambient/explosions/explode_4.ogg", self.Origin , math.Clamp(self.Radius*10,75,165), math.Clamp(300 - self.Radius*25,15,255))
+		sound.Play( "ambient/explosions/explode_5.wav", self.Origin , math.Clamp(self.Radius*10,75,165), math.Clamp(300 - self.Radius*12,15,255))
+		sound.Play( "ambient/explosions/explode_4.wav", self.Origin , math.Clamp(self.Radius*10,75,165), math.Clamp(300 - self.Radius*25,15,255))
 
 	end
 

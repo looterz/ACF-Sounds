@@ -2,7 +2,6 @@
 AddCSLuaFile( "sh_definitions.lua" );
 AddCSLuaFile( "shared.lua" );
 AddCSLuaFile( "cl_init.lua" );
-AddCSLuaFile( "cl_soundbrowser.lua" );
 
 include( "sh_definitions.lua" );
 include( "shared.lua" );

@@ -1,7 +1,6 @@
 
 include( "sh_definitions.lua" );
 include( "shared.lua" );
-include( "cl_soundbrowser.lua" );
 
 function ACF_PROCESS_SOUND( Name, Pos )
 
