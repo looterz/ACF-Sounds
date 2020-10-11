@@ -161,10 +161,14 @@ end
 
 hook.Add( "InitPostEntity", "ACF_SOUNDS_INIT", function()
 
-	-- Banner
-	print("[ACF] ACF Sound Extension Project version ".. tostring( ACF_SOUND_VERSION ) .." loaded.\n");
+	timer.Simple( 3, function()
+				
+		-- Banner
+		print("[ACF] ACF Sound Extension Project version ".. tostring( ACF_SOUND_VERSION ) .." loaded.\n");
 
-	-- rip cpu
-	ACF_SOUND_BUILD();
+		-- rip cpu
+		ACF_SOUND_BUILD();
+				
+	end );
 
 end );
